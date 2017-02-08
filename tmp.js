@@ -5,10 +5,86 @@ var assert = require('chai').assert
  * Write a function that calculates the sum of all the numbers in an array
  */
 
+function sumOfArray(inbound){
+// 	var i = 0
+ 	var result = 0
+// 	for (i in inbound){
+// 		console.log(i)
+// 		result = result + i
+// 	}
+// 	console.log(result)
+
+ 	for (i = 0; i < inbound.length; i++){
+ 		result = result + inbound[i]
+ 	}
+ 	return result
+
+ }
+
 // PART 1
 
 // Write a function maxOfArray() that takes an array of
 // numbers as an argument and returns the highest number in the array.
+
+
+function maxOfArray(inboundArray){
+	
+	var arrayLength = inboundArray.length
+	var currentHero = 0
+	var destiny = true
+    
+	//go through each spot
+	var i=0
+	for(i = arrayLength; i > 0; i--){
+
+		var hero = inboundArray[i]
+		var currentIndex = inboundArray.indexOf(hero)
+		
+        //move left
+        var direction = "left"
+		var j =0;
+        
+        var destiny = true
+		for(j = currentIndex; j > 0 && destiny === true; j--){
+
+			var destiny = false 
+			
+			var enemy = inboundArray[j]
+
+			destiny = evaluate(hero, enemy)
+
+		}
+        
+        var direction = "right"
+               
+        //move right
+		var k =0;
+		for(k = 0; k < (arrayLength - currentIndex) && destiny === true; k++){
+
+			enemy = inboundArray[k]
+
+			destiny = evaluate(hero, enemy)
+            console.log(destiny)
+
+		}
+
+		if (destiny === true){
+
+			currentHero = hero 
+			console.log(hero)
+			return currentHero
+			
+		}
+	}
+}
+
+function evaluate(hero, enemy){
+
+	if (hero >= enemy){
+		return true
+	}
+	return false
+}
 
 
 /**
@@ -115,7 +191,7 @@ describe('reverse()', function(){
 })
 describe('fizzbuzz()', function(){
 	it('should meet the standards listed in Part 4 instructions', function(){
-		checkFuncBasics('fizzbuzz',2)
+		checkFuncBasics('fizzbuzz',1)
 		assert.equal(".", fizzbuzz(1))
 		assert.equal("..", fizzbuzz(2))
 		assert.equal("..fizz", fizzbuzz(3))
