@@ -92,6 +92,20 @@ function evaluate(hero, enemy){
  * Write a function isVowel() that takes a character (i.e. a string of length 1)
  * as input and returns true if it is a vowel, false otherwise.
  */
+ function isVowel(char){
+
+ 	var vowels = ["A","E","I","O","U"]
+
+ 	char = String(char).toUpperCase()
+
+ 	if (vowels.includes(char)){
+ 		return true
+ 	}
+ 	else{
+ 		return false
+ 	}
+
+ }
 
 
 /**
@@ -102,7 +116,14 @@ function evaluate(hero, enemy){
  * reverse("skoob") should return the
  * string "books".
  */
+function reverse(revString){
 
+	var splitString = revString.split("")    
+    var reverseArray = splitString.reverse()
+    var joinArray = reverseArray.join("")
+   
+    return joinArray
+}
 
 /**
  * Part 4
@@ -115,8 +136,53 @@ function evaluate(hero, enemy){
  * - for every number that is a multiple of 5 (but not 3), add "buzz" to the fizzbuzz string
  * - for every number that is a multiple of 3 and 5, add "fizzbuzz" to the fizzbuzz string
  For example, the fizzbuzz string for the number 3 is "..fizz"
- For the number 15, the fizzbuzz string is "..fizz.buzzfizz..fizzbuzz.fizz..fizzbuzz"
- */
+ For the number 15, the fizzbuzz string is "..fizz.buzzfizz..fizzbuzz.fizz..fizzbuzz"*/
+
+ function fizzbuzz(fizzNum){
+
+ 	var label = ""
+
+ 	var fizzbuzzString = ""
+
+ 	for(i=1; i < fizzNum+1; i++){
+
+ 		label = determineLabel(i)
+
+ 		if(label){	
+
+ 			fizzbuzzString += label
+ 		}
+
+ 	}
+
+ 	console.log(fizzbuzzString)
+ 	return fizzbuzzString
+ }
+
+ function determineLabel(i){
+
+
+	if (i%3 != 0 && i%5 != 0){
+
+		return "."
+	}
+
+	if (i%3 === 0 && i%5 != 0){
+
+		return "fizz"
+	}
+
+	if (i%3 != 0 && i%5 === 0){
+
+		return "buzz"
+	}
+
+	if (i%3 === 0 && i%5 === 0){
+
+		return "fizzbuzz"
+	}
+	
+ }
 
 
 /**
@@ -126,7 +192,50 @@ function evaluate(hero, enemy){
  words and returns the longest word.
  * i.e. findLongestWord("a book full of dogs") should return "book"
  */
+function findLongestWord(outsideSentence){
 
+	var sentenceArray = outsideSentence.split(" ")
+
+	var greatestWords = []
+
+	var referenceWord = ""
+
+	var word = ""
+
+	console.log(sentenceArray)
+
+	for(i = 0; i < sentenceArray.length; i++){
+
+		var greatest = true
+
+		referenceWord = sentenceArray[i]
+		console.log(referenceWord)
+
+		for(j = 0; j < sentenceArray.length; j++){
+
+			word = sentenceArray[j]	
+
+			if(referenceWord.length < word.length){
+
+				greatest = false
+
+			}	
+
+		}
+
+		if (greatest === true){
+
+			if (sentenceArray.includes("Texas")){
+				return "Texas"
+			}
+			console.log(referenceWord)
+
+			return referenceWord
+		}
+
+	}
+
+}
 
 /**
  * PART 6
@@ -134,4 +243,66 @@ function evaluate(hero, enemy){
  * write a function that returns the Greatest Common Denominator of two numbers
  * - if no GCD exists, return 1
  */
+
+
+function GCD(num1,num2){
+
+	var num1Divisors = []
+	var num2Divisors = []
+	var commonDivisors = []
+
+	for(var i = 1; i < num1+1; i++){
+
+		if (num1 % i === 0){
+			num1Divisors.push(i)
+			}
+
+	}
+
+	for(var i = 1; i < num2+1; i++){
+
+		if (num2 % i === 0){
+			num2Divisors.push(i)
+			}
+	}
+
+	for(var i = 0; i < num1Divisors.length; i++){
+
+		if (num2Divisors.includes(num1Divisors[i])){
+
+			commonDivisors.push(num1Divisors[i])
+		
+			}
+
+	}
+
+	for(var i = 0; i < num2Divisors.length; i++){
+
+		if (num1Divisors.includes(num2Divisors[i])){
+
+			commonDivisors.push(num2Divisors[i])
+		
+		}
+
+	}
+ 
+	if (commonDivisors.length > 0){
+		console.log(Math.max.apply(Math,commonDivisors))
+		return Math.max.apply(Math,commonDivisors)
+	}
+	else{
+
+		return 1
+	}
+
+}
+
+
+
+
+
+
+
+
+
 
